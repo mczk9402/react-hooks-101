@@ -2,6 +2,7 @@ import React, { useReducer, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import reducer from "../reduceer";
+import Event from "./Event";
 
 const App = () => {
   const [state, dispatch] = useReducer(reducer, []);
@@ -22,7 +23,30 @@ const App = () => {
     setBody("");
   };
 
-  console.log({ state });
+  // const deleteEvent = (event) => {
+  //   const { id, title, body } = event;
+  //   console.log(event);
+
+  //   dispatch({
+  //     type: "DELETE_EVENT",
+  //     id,
+  //     title,
+  //     body,
+  //   });
+  // };
+
+  const handleClickDeleteButton = (id) => {
+    dispatch({
+      type: "DELETE_EVENT",
+      id: id,
+    });
+  };
+
+  const deleteAllEvent = () => {
+    // dispatch({
+    //   type: "DELTE_ALL_EVENT",
+    // });
+  };
 
   return (
     <div className="container-fluid">
@@ -49,7 +73,9 @@ const App = () => {
         <button className="btn btn-primary" onClick={addEvent}>
           イベントを作成する
         </button>
-        <button className="btn btn-danger">すべてのイベントを削除する</button>
+        <button className="btn btn-danger" onClick={deleteAllEvent}>
+          すべてのイベントを削除する
+        </button>
       </form>
 
       <h4>イベント一覧</h4>
@@ -62,7 +88,11 @@ const App = () => {
             <th></th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+          {state.map((event, index) => (
+            <Event key={index} event={event} dispatch={dispatch} />
+          ))}
+        </tbody>
       </table>
     </div>
   );
