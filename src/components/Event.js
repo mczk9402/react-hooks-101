@@ -1,5 +1,7 @@
 import React from "react";
 
+import { DELETE_EVENT } from "../actions";
+
 const Event = (props) => {
   const { id, title, body } = props.event;
 
@@ -14,7 +16,7 @@ const Event = (props) => {
 
     if (result)
       props.dispatch({
-        type: "DELETE_EVENT",
+        type: DELETE_EVENT,
         id,
       });
   };

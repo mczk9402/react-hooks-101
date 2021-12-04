@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import { DELETE_ALL_EVENT } from "../actions";
+
 const EventForm = ({ state, dispatch }) => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
@@ -29,7 +31,7 @@ const EventForm = ({ state, dispatch }) => {
 
     if (result)
       dispatch({
-        type: "DELETE_ALL_EVENT",
+        type: DELETE_ALL_EVENT,
       });
   };
 
