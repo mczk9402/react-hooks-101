@@ -23,29 +23,12 @@ const App = () => {
     setBody("");
   };
 
-  // const deleteEvent = (event) => {
-  //   const { id, title, body } = event;
-  //   console.log(event);
+  const deleteAllEvent = (e) => {
+    e.preventDefault();
 
-  //   dispatch({
-  //     type: "DELETE_EVENT",
-  //     id,
-  //     title,
-  //     body,
-  //   });
-  // };
-
-  const handleClickDeleteButton = (id) => {
     dispatch({
-      type: "DELETE_EVENT",
-      id: id,
+      type: "DELTE_ALL_EVENT",
     });
-  };
-
-  const deleteAllEvent = () => {
-    // dispatch({
-    //   type: "DELTE_ALL_EVENT",
-    // });
   };
 
   return (
