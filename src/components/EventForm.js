@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 
-import { CREATE_EVENT, DELETE_ALL_EVENT } from "../actions";
+import { CREATE_EVENT, DELETE_ALL_EVENTS } from "../actions";
 import AppContext from "../contexts/AppContext";
 
 const EventForm = () => {
@@ -9,7 +9,6 @@ const EventForm = () => {
   const [body, setBody] = useState("");
 
   const addEvent = (e) => {
-    // formの中だからキャンセルしないとリロードする？
     e.preventDefault();
 
     dispatch({
@@ -25,16 +24,7 @@ const EventForm = () => {
   const deleteAllEvents = (e) => {
     e.preventDefault();
     const result = window.confirm("全てのイベントを本当に削除しても良いですか？");
-
-    // result &&
-    //   dispatch({
-    //     type: "DELETE_ALL_EVENT",
-    //   });
-
-    if (result)
-      dispatch({
-        type: DELETE_ALL_EVENT,
-      });
+    if (result) dispatch({ type: DELETE_ALL_EVENTS });
   };
 
   const unCreatable = title === "" || body === "";
@@ -52,6 +42,7 @@ const EventForm = () => {
             onChange={(e) => setTitle(e.target.value)}
           />
         </div>
+
         <div className="form-group">
           <label htmlFor="formEventBody">ボディー</label>
           <textarea
@@ -61,22 +52,16 @@ const EventForm = () => {
             onChange={(e) => setBody(e.target.value)}
           />
         </div>
-        {/* <button
-          className="btn btn-primary"
-          onClick={addEvent}
-          disabled={!title || !body ? true : false}
-        >
-          イベントを作成する
-        </button> */}
+
         <button className="btn btn-primary" onClick={addEvent} disabled={unCreatable}>
           イベントを作成する
         </button>
-        {/* <button className="btn btn-danger" onClick={deleteAllEvents} disabled={!state[0]}>
-          {console.log(state)}
-          すべてのイベントを削除する
-        </button> */}
-        <button className="btn btn-danger" onClick={deleteAllEvents} disabled={state.length === 0}>
-          すべてのイベントを削除する
+        <button
+          className="btn btn-danger"
+          onClick={deleteAllEvents}
+          disabled={state.events.length === 0}
+        >
+          全てのイベントを削除する
         </button>
       </form>
     </>
