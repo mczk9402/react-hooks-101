@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
-import { DELETE_ALL_EVENT } from "../actions";
+import { CREATE_EVENT, DELETE_ALL_EVENT } from "../actions";
+import AppContext from "../contexts/AppContext";
 
-const EventForm = ({ state, dispatch }) => {
+const EventForm = () => {
+  const { state, dispatch } = useContext(AppContext);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
@@ -11,7 +13,7 @@ const EventForm = ({ state, dispatch }) => {
     e.preventDefault();
 
     dispatch({
-      type: "CREATE_EVENT",
+      type: CREATE_EVENT,
       title,
       body,
     });
@@ -36,6 +38,7 @@ const EventForm = ({ state, dispatch }) => {
   };
 
   const unCreatable = title === "" || body === "";
+
   return (
     <>
       <h4>イベント作成フォーム</h4>
