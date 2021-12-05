@@ -10,7 +10,7 @@ import reducer from "../reducers";
 const App = () => {
   const initialState = {
     events: [],
-    oprationLogs: [],
+    operationLogs: [],
   };
   const [state, dispatch] = useReducer(reducer, initialState);
 
